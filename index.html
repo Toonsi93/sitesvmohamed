@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lycée Simone Veil - Excellence Éducative</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #1a1a1a;
+            --accent: #0066cc;
+            --light: #f8f8f8;
+            --gray: #767676;
+            --white: #ffffff;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            --border-radius: 0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--primary);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: flex-end;
+            padding: var(--spacing-xs) var(--spacing-md);
+            font-size: 0.8rem;
+            background-color: var(--light);
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-top a {
+            margin-left: var(--spacing-md);
+            color: var(--gray);
+        }
+
+        .header-top a:hover {
+            color: var(--accent);
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            white-space: nowrap; /* Empêche le texte de se couper */
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-main {
+            display: flex;
+            position: relative;
+        }
+
+        .nav-main > li {
+            position: relative;
+            list-style: none;
+        }
+
+        .nav-main > li > a {
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-weight: 500;
+            position: relative;
+            display: block;
+            white-space: nowrap; /* Empêche le texte de se couper */
+        }
+
+        .nav-main > li > a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-main > li:hover > a:after {
+            width: 80%;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 220px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .nav-main li:hover > .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li {
+            list-style: none;
+            position: relative;
+        }
+
+        .dropdown a {
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--secondary);
+        }
+
+        .dropdown a:hover {
+            background-color: var(--light);
+            color: var(--accent);
+        }
+
+        .dropdown .nested-dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: var(--white);
+            min-width: 220px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(10px);
+            transition: var(--transition);
+        }
+
+        .dropdown li:hover > .nested-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-actions a {
+            margin-left: var(--spacing-md);
+            font-size: 1.2rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            margin-top: 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://img.genial.ly/5bf521b1ab0518226c6b7d8b/378c23ed-9623-4e1e-a229-c88a45d2bd93.jpeg') no-repeat center center/cover;
+            color: var(--white);
+        }
+
+        .hero-content {
+            max-width: 600px;
+            padding: var(--spacing-lg);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-lg);
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-right: var(--spacing-sm); /* Espacement entre les boutons */
+            margin-bottom: var(--spacing-sm); /* Espacement vertical entre les boutons */
+        }
+
+        .btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            margin-left: 0; /* Suppression de la marge gauche */
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: var(--spacing-lg);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* News Section */
+        .news-section {
+            padding: var(--spacing-xl) var(--spacing-md);
+            background-color: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .news-card {
+            background-color: var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .news-card:hover .news-image img {
+            transform: scale(1.05);
+        }
+
+        .news-content {
+            padding: var(--spacing-md);
+        }
+
+        .news-date {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .news-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .news-content p {
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray);
+        }
+
+        .read-more {
+            font-weight: 600;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: var(--spacing-md);
+            color: var(--white);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: var(--spacing-xl) var(--spacing-md);
+            background-color: var(--light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-details i {
+            margin-right: var(--spacing-sm);
+            color: var(--accent);
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+
+        .map-container {
+            height: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--white);
+            position: relative;
+            padding-bottom: var(--spacing-xs);
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .footer-links a {
+            color: #ccc;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid #333;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background-color: var(--white);
+            padding: var(--spacing-xl) var(--spacing-md);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: var(--spacing-sm) 0;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-nav .nested-menu {
+            padding-left: var(--spacing-md);
+            display: none;
+        }
+
+        .mobile-nav .menu-toggle-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: var(--spacing-sm);
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .nav-main > li > a {
+                padding: var(--spacing-sm) var(--spacing-sm);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+
+            .nav-main {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 1001;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content {
+                text-align: center;
+            }
+            
+            .header-top {
+                justify-content: center;
+            }
+            
+            .header-top a {
+                margin: 0 var(--spacing-xs);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <a href="#"><i class="fas fa-user"></i> Espace Élèves</a>
+            <a href="#"><i class="fas fa-users"></i> Espace Parents</a>
+            <a href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+        </div>
+        <div class="header-main container">
+            <div class="logo">Lycée <span>Simone Veil</span></div>
+            <nav>
+                <ul class="nav-main">
+                    <li>
+                        <a href="#">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="#">Bienvenue au Lycée</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Présentation du lycée</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">Horaires du lycée</a></li>
+                                    <li><a href="#">Partenariats</a>
+                                        <ul class="nested-dropdown">
+                                            <li><a href="#">Cordée Alvaro SIZA</a></li>
+                                            <li><a href="#">Cordée Gershwin</a></li>
+                                            <li><a href="#">Cordée Gateway</a></li>
+                                            <li><a href="#">Prépa Sciences-Po</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Parcoursup</a></li>
+                                    <li><a href="#">Aide à l'orientation</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Actualités</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">Administratives</a>
+                                        <ul class="nested-dropdown">
+                                            <li><a href="#">Les équipements numériques</a></li>
+                                            <li><a href="#">Dates des examens</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Vie scolaire</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Projet d'établissement</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">EPS et AS</a></li>
+                                    <li><a href="#">E.D.D.</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Organigramme du lycée</a></li>
+                            <li><a href="#">Réglement intérieur</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Parcours de Formations</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Bac Professionnel</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">MELEC</a></li>
+                                    <li><a href="#">Microtechniques</a></li>
+                                    <li><a href="#">CIEL</a></li>
+                                    <li><a href="#">MFER</a></li>
+                                    <li><a href="#">MCVA (commerce)</a></li>
+                                    <li><a href="#">MCVB (vente)</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Baccalauréat Général et Technologique</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">Seconde GT</a></li>
+                                    <li><a href="#">Enseignements optionnels</a></li>
+                                    <li><a href="#">Bac technologique</a>
+                                        <ul class="nested-dropdown">
+                                            <li><a href="#">STI2D / STMG</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Bac général</a>
+                                        <ul class="nested-dropdown">
+                                            <li><a href="#">Spécialités</a></li>
+                                            <li><a href="#">Horaires et coefficients des baccalauréats</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#">BTS</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">CIEL (Cybersécurité Informatique & ELectronique)</a></li>
+                                    <li><a href="#">Commerce international</a></li>
+                                    <li><a href="#">Conception Industrialisation en Microtechniques</a></li>
+                                    <li><a href="#">CPRP</a>
+                                        <ul class="nested-dropdown">
+                                            <li><a href="#">Formation Initiale</a></li>
+                                            <li><a href="#">Formation en alternance</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Fluides Energies Domotique</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Licence</a></li>
+                            <li><a href="#">UPEAA</a></li>
+                            <li><a href="#">3 Prépa-Métiers</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Informations pratiques</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Aides</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">Bourses lycéens</a></li>
+                                    <li><a href="#">Bourses étudiants</a></li>
+                                    <li><a href="#">Aménagement d'epreuves et handicap</a></li>
+                                    <li><a href="#">FAQ NUMERIQUES</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Taxe d'apprentissage</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Erasmus+ et projets internationaux</a>
+                        <ul class="dropdown">
+                            <li><a href="#">C'est quoi?</a></li>
+                            <li><a href="#">La presse en parle</a></li>
+                            <li><a href="#">2023 2024</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">Une visio pour commencer le jumelage avec Porec</a></li>
+                                    <li><a href="#">Voyage en Allemagne DNL</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">2024 2025</a>
+                                <ul class="nested-dropdown">
+                                    <li><a href="#">1ère édition de "La petite Novine de Noisiel et Porec"</a></li>
+                                    <li><a href="#">ERASMUSDAYS</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Euroscol</a></li>
+                            <li><a href="#">Accréditation</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="menu-toggle-btn" id="closeMobileNav">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li>
+                <a href="#">Bienvenue au Lycée <i class="fas fa-chevron-down"></i></a>
+                <ul class="nested-menu">
+                    <li><a href="#">Présentation du lycée</a></li>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Projet d'établissement</a></li>
+                    <li><a href="#">Organigramme du lycée</a></li>
+                    <li><a href="#">Réglement intérieur</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Parcours de Formations <i class="fas fa-chevron-down"></i></a>
+                <ul class="nested-menu">
+                    <li><a href="#">Bac Professionnel</a></li>
+                    <li><a href="#">Baccalauréat Général et Technologique</a></li>
+                    <li><a href="#">BTS</a></li>
+                    <li><a href="#">Licence</a></li>
+                    <li><a href="#">UPEAA</a></li>
+                    <li><a href="#">3 Prépa-Métiers</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Informations pratiques <i class="fas fa-chevron-down"></i></a>
+                <ul class="nested-menu">
+                    <li><a href="#">Aides</a></li>
+                    <li><a href="#">Taxe d'apprentissage</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Erasmus+ et projets internationaux <i class="fas fa-chevron-down"></i></a>
+                <ul class="nested-menu">
+                    <li><a href="#">C'est quoi?</a></li>
+                    <li><a href="#">La presse en parle</a></li>
+                    <li><a href="#">2023 2024</a></li>
+                    <li><a href="#">2024 2025</a></li>
+                    <li><a href="#">Euroscol</a></li>
+                    <li><a href="#">Accréditation</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Lycée Simone Veil</h1>
+                <p>Académique et innovation pédagogique au cœur de Noisiel</p>
+                <div>
+                    <a href="#" class="btn">Découvrir nos formations</a>
+                    <a href="#" class="btn btn-outline">Nous contacter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="container">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Formations d'Excellence</h3>
+                <p>Des parcours adaptés à chaque ambition, du bac général aux filières technologiques.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-microscope"></i>
+                </div>
+                <h3>Équipements Modernes</h3>
+                <p>Laboratoires high-tech, salles informatiques et espaces collaboratifs dernier cri.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe-europe"></i>
+                </div>
+                <h3>Ouverture Internationale</h3>
+                <p>Programmes d'échange, sections européennes et certifications en langues étrangères.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Actualités</h2>
+                <p>Découvrez les dernières nouvelles de notre établissement</p>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://lyceesimoneveil.fr/images/rentree%202025.png" alt="Forum des métiers">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">9 septembre 2025</div>
+                        <h3>Modalités de rentrée 2025</h3>
+                        <p>Lettre de rentrée pour les élèves et les classes</p>
+                        <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://lyceesimoneveil.fr/images/Espace%20de%20travail.png" alt="Activités périscolaires">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">8 septembre 2025</div>
+                        <h3>École ouverte</h3>
+                        <p>session août 2025 -Programme et inscription</p>
+                        <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://lyceesimoneveil.fr/images/ri.png" alt="Réunion de rentrée">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">1 septembre 2025</div>
+                        <h3>Réglement intérieur</h3>
+                        <p>Réglement intérieur</p>
+                        <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Galerie</h2>
+                <p>Découvrez notre établissement en images</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://www.creteil.snes.edu/IMG/jpg/img-20240528-wa0004.jpg" alt="Bâtiment du lycée">
+                    <div class="gallery-overlay">
+                        <h3>Le Lycée</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Laboratoire de sciences">
+                    <div class="gallery-overlay">
+                        <h3>Laboratoires</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bibliothèque">
+                    <div class="gallery-overlay">
+                        <h3>Bibliothèque</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Étudiants">
+                    <div class="gallery-overlay">
+                        <h3>Vie Étudiante</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact</h2>
+                <p>Nous sommes à votre disposition</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Coordonnées</h3>
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>LYCÉE Simone VEIL<br>1, avenue Pierre Mendes France<br>77186 NOISIEL</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>01.60.37.53.00 / 01.60.37.56.
+                                </li>
+                    </ul>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5251.817737648975!2d2.611294046422758!3d48.84087694654595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e60fe7a0dd3d7f%3A0x6dd452db615758d9!2sLyc%C3%A9e%20Polyvalent%20Simone%20VEIL!5e0!3m2!1sfr!2sfr!4v1685547810071!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Lycée Simone Veil</h3>
+                    <p>Excellence académique et innovation pédagogique au cœur de Noisiel.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Formations</a></li>
+                        <li><a href="#">Actualités</a></li>
+                        <li><a href="#">Vie Scolaire</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Ressources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Pronote</a></li>
+                        <li><a href="#">Mon Lycée.net</a></li>
+                        <li><a href="#">Parcoursup</a></li>
+                        <li><a href="#">Mentions Légales</a></li>
+                        <li><a href="#">Politique de Confidentialité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Inscrivez-vous à notre newsletter pour recevoir les dernières actualités.</p>
+                    <form>
+                        <input type="email" placeholder="Votre email" style="padding: 10px; width: 100%; margin-bottom: 10px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">S'inscrire</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lycée Simone Veil - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-bars');
+            menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-main a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
